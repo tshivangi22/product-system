@@ -1,65 +1,37 @@
 {
-  "name": "@jridgewell/set-array",
-  "version": "1.2.1",
-  "description": "Like a Set, but provides the index of the `key` in the backing array",
-  "keywords": [],
-  "author": "Justin Ridgewell <justin@ridgewell.name>",
+  "name": "@nodelib/fs.stat",
+  "version": "2.0.5",
+  "description": "Get the status of a file with some features",
   "license": "MIT",
-  "repository": "https://github.com/jridgewell/set-array",
-  "main": "dist/set-array.umd.js",
-  "module": "dist/set-array.mjs",
-  "typings": "dist/types/set-array.d.ts",
-  "exports": {
-    ".": [
-      {
-        "types": "./dist/types/set-array.d.ts",
-        "browser": "./dist/set-array.umd.js",
-        "require": "./dist/set-array.umd.js",
-        "import": "./dist/set-array.mjs"
-      },
-      "./dist/set-array.umd.js"
-    ],
-    "./package.json": "./package.json"
-  },
-  "files": [
-    "dist"
+  "repository": "https://github.com/nodelib/nodelib/tree/master/packages/fs/fs.stat",
+  "keywords": [
+    "NodeLib",
+    "fs",
+    "FileSystem",
+    "file system",
+    "stat"
   ],
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">= 8"
   },
+  "files": [
+    "out/**",
+    "!out/**/*.map",
+    "!out/**/*.spec.*"
+  ],
+  "main": "out/index.js",
+  "typings": "out/index.d.ts",
   "scripts": {
-    "prebuild": "rm -rf dist",
-    "build": "run-s -n build:*",
-    "build:rollup": "rollup -c rollup.config.js",
-    "build:ts": "tsc --project tsconfig.build.json",
-    "lint": "run-s -n lint:*",
-    "lint:prettier": "npm run test:lint:prettier -- --write",
-    "lint:ts": "npm run test:lint:ts -- --fix",
-    "test": "run-s -n test:lint test:only",
-    "test:debug": "mocha --inspect-brk",
-    "test:lint": "run-s -n test:lint:*",
-    "test:lint:prettier": "prettier --check '{src,test}/**/*.ts'",
-    "test:lint:ts": "eslint '{src,test}/**/*.ts'",
-    "test:only": "mocha",
-    "test:coverage": "c8 mocha",
-    "test:watch": "mocha --watch",
-    "prepublishOnly": "npm run preversion",
-    "preversion": "run-s test build"
+    "clean": "rimraf {tsconfig.tsbuildinfo,out}",
+    "lint": "eslint \"src/**/*.ts\" --cache",
+    "compile": "tsc -b .",
+    "compile:watch": "tsc -p . --watch --sourceMap",
+    "test": "mocha \"out/**/*.spec.js\" -s 0",
+    "build": "npm run clean && npm run compile && npm run lint && npm test",
+    "watch": "npm run clean && npm run compile:watch"
   },
   "devDependencies": {
-    "@rollup/plugin-typescript": "8.3.0",
-    "@types/mocha": "9.1.1",
-    "@types/node": "17.0.29",
-    "@typescript-eslint/eslint-plugin": "5.10.0",
-    "@typescript-eslint/parser": "5.10.0",
-    "c8": "7.11.0",
-    "eslint": "8.7.0",
-    "eslint-config-prettier": "8.3.0",
-    "mocha": "9.2.0",
-    "npm-run-all": "4.1.5",
-    "prettier": "2.5.1",
-    "rollup": "2.66.0",
-    "tsx": "4.7.1",
-    "typescript": "4.5.5"
-  }
+    "@nodelib/fs.macchiato": "1.0.4"
+  },
+  "gitHead": "d6a7960d5281d3dd5f8e2efba49bb552d090f562"
 }
